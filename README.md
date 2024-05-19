@@ -1,24 +1,50 @@
-# VU2
-First Assignment 
-OOP WITH JAVA INDIVIDUAL ASSIGNMENT
-[TO BE ASSESSED OUT OF 5MARKS]
-Victoria University (VU) needs a program to calculate how much to pay their hourly
-employees. The HR Manual requires that employees get paid time and a half for any hours over
-40 that they work in a single week.
-For example, if Mr. Wakale Fazali, a Lecturer works 45 hours, He gets 5 hours of overtime, at
-1.5 times their base pay. VU requires that hourly employees be paid at least UGX40,000 an
-hour and an employee cannot work more than 60 hours in a week.
-HINT
-▪ An employee gets paid (hours worked) × (base pay), for each hour up to 40 hours.
-▪ For every hour over 40, they get overtime = (base pay) × 1.5.
-▪ The base pay must not be less than the minimum wage (UGX40,000 an hour) and if it
-is, print an error. If the number of hours is greater than 60, print an error message.
-REQUIREMENTS
-1. Create a new class called VU.
-2. Write a method that takes the base pay and hours worked as parameters, and prints the
-total pay or an error. Write a main method that calls this method for each of these
-employees.
-Employees   Base Pay     Hours Worked
-Employee A UGX28,000.00     35
-Employee B UGX35,000.00     45
-Employee C UGX38,000.00     75
+public class VU2 {
+    // Method to calculate total pay for an employee
+    public static void calculatePay(double basePay, int hoursWorked) {
+        // Check if base pay is less than the minimum wage
+        if (basePay < 40000) {
+            System.out.println("Error: Base pay cannot be less than UGX40,000 an hour.");
+            return;
+        }
+        
+        // Check if hours worked is greater than 60
+        if (hoursWorked > 60) {
+            System.out.println("Error: An employee cannot work more than 60 hours in a week.");
+            return;
+        }
+        
+        // Calculate total pay
+        double totalPay;
+        if (hoursWorked <= 40) {
+            totalPay = hoursWorked * basePay;
+        } else {
+            // Calculate regular pay for 40 hours
+            double regularPay = 40 * basePay;
+            // Calculate overtime pay for hours over 40
+            double overtimePay = (hoursWorked - 40) * (basePay * 1.5);
+            // Total pay is the sum of regular pay and overtime pay
+            totalPay = regularPay + overtimePay;
+        }
+        
+        // Print total pay
+        System.out.println("Total pay: UGX" + totalPay);
+    }
+    
+    public static void main(String[] args) {
+        // Employee A
+        System.out.println("Employee A:");
+        calculatePay(28000.00, 35);
+        
+        // Employee B
+        System.out.println("\nEmployee B:");
+        calculatePay(35000.00, 45);
+        
+        // Employee C
+        System.out.println("\nEmployee C:");
+        calculatePay(38000.00, 75);
+        
+        // Employee D
+        System.out.println("\nEmployee D:");
+        calculatePay(40000.00, 55);
+    }
+}
